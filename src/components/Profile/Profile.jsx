@@ -1,22 +1,12 @@
 import React from "react";
 import style from './Profile.module.css'
+import MyPosts from "./MyPosts/MyPosts.module";
 
 const Profile = ()=>{
     return(
-        <div className={style.content}>
-            <img src="https://i.playground.ru/p/SCfJ19mum0SsgDhAN1jALA.jpeg" alt=""/>
-            <div className="avatar">
-
-            </div>
-            <div className="posts">
-
-            </div>
-            <div className="new_posts">
-
-            </div>
-            <div className="posts">
-
-            </div>
+        <div>
+            <img className={style.main_img} src="https://i.playground.ru/p/SCfJ19mum0SsgDhAN1jALA.jpeg" alt=""/>
+            <MyPosts/>
         </div>
     )
 }

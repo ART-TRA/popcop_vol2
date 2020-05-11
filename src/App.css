@@ -9,3 +9,9 @@
   /*grid-gap: 10px; !*расст-е между эл-ми*!*/
 }
 
+.app-wrap_content{
+    position: relative;
+    grid-area: content;
+    border-top: 1px solid #999999;
+}
+
