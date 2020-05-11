@@ -1,0 +1,19 @@
+.nav_menu{
+    grid-area: nav;
+
+    display: flex;
+    flex-direction: column;
+    /*border-top: 1px solid #ffffff;*/
+}
+.menu_item{
+    padding: 0.1em 3em;
+}
+.menu_item_link{
+    color: #999999;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.active_item{
+    color: #333333;
+    font-weight: 600;
+}

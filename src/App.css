@@ -1,0 +1,11 @@
+.app-wrap{
+  display: grid;
+
+  grid-template-areas:
+          "header header"
+          "nav content";
+  grid-template-rows: 60px 1fr; /*2 строки*/
+  grid-template-columns: 1fr 10fr; /*2 колонки*/
+  /*grid-gap: 10px; !*расст-е между эл-ми*!*/
+}
+
