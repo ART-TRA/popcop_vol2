@@ -17,20 +17,35 @@ const Message = (props)=>{
     return <div className={style.message}>{props.text}</div>
 }
 
+//добавил массивы с данными по польз-лям и сообщениям
+const dialogsData = [
+    {id: "1", name:"Seydoux"},
+    {id: "2", name:"Reedus"},
+    {id: "3", name:"Mikkelsen"},
+    {id: "4", name:"Qualley"},
+    {id: "5", name:"DelToro"}
+]
+
+const messagesData= [
+    {id: "1", text:"Freeze"},
+    {id: "2", text:"You're busted buddy!"},
+    {id: "3", text:"I'm a cop"},
+]
+
 const Dialogs = ()=>{
     return (
         <div className={style.dialogs}>
             <div className={style.dialog_persons}>
-                <Dialog_person name="Seydoux" id="1"/>
-                <Dialog_person name="Reedus" id="2"/>
-                <Dialog_person name="Mikkelsen" id="3"/>
-                <Dialog_person name="Qualley" id="4"/>
-                <Dialog_person name="DelToro" id="5"/>
+                <Dialog_person name={dialogsData[0].name} id={dialogsData[0].id}/>
+                <Dialog_person name={dialogsData[1].name} id={dialogsData[1].id}/>
+                <Dialog_person name={dialogsData[2].name} id={dialogsData[2].id}/>
+                <Dialog_person name={dialogsData[3].name} id={dialogsData[3].id}/>
+                <Dialog_person name={dialogsData[4].name} id={dialogsData[4].id}/>
             </div>
             <div className={style.messages}>
-                <Message text="Freeze"/>
-                <Message text="You're busted buddy!"/>
-                <Message text="I'm a cop"/>
+                <Message text={messagesData[0].text}/>
+                <Message text={messagesData[1].text}/>
+                <Message text={messagesData[2].text}/>
             </div>
         </div>
     )

@@ -8,6 +8,7 @@ const Post = (props)=>{
             {/*<img className={style.person_img} src="https://img5.goodfon.ru/wallpaper/nbig/8/c8/lea-seydoux-death-stranding-kojima-productions-hideo-kojima.jpg" alt="" />*/}
             {/*обязательно в фигурн скобках обращение к параметрам, которые явл объектами со св-вами*/}
             {props.name}
+            <div> likes {props.likes}</div>
         </div>
     )
 }
