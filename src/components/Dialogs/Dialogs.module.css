@@ -1,0 +1,20 @@
+.dialogs{
+    display: flex;
+}
+.dialog_persons{
+    border-right: 1px solid #333333;
+    padding: 1em 2em;
+}
+.dialog_peron{
+    padding: 0.1em 0;
+}
+.active{
+    color: #999999;
+    font-weight: 600;
+}
+.messages{
+    padding: 1em 2em;
+}
+.message{
+    padding: 0.1em 0;
+}

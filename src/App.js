@@ -5,6 +5,9 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
+import Music from "./components/Music/Music";
+import Gallery from "./components/Gallery/Gallery";
+import Settings from "./components/Settings/Settings";
 
 import {BrowserRouter, Route} from "react-router-dom"; //необх импортировать модуль роутинга для работы с роутами
 
