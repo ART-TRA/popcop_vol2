@@ -1,23 +1,9 @@
 import React from "react";
 import style from './Dialogs.module.css'
-//при добавлении первого тега линк в jsx автоматически имрорт-ся модуль навигации
-import {NavLink} from "react-router-dom";
+import DialogItem from "./DialogItem/DialogItem";
+import Message from "./Message/Message";
 
-//отдельный компонент, который возвращает диалог с параметрами имени и id
-const Dialog_person = (props)=>{
-    const path = "/dialogs/" + props.id;
-    return(
-        <div className={style.dialog_person}>
-            <NavLink className={style.dialog_person_link} activeClassName={style.active} to={path}>{props.name}</NavLink>
-        </div>
-    )
-}
-//отдельный компонент, который возвращает текст сообщения
-const Message = (props)=>{
-    return <div className={style.message}>{props.text}</div>
-}
-
-//добавил массивы с данными по польз-лям и сообщениям
+//массивы с данными по польз-лям и сообщениям
 const dialogsData = [
     {id: "1", name:"Seydoux"},
     {id: "2", name:"Reedus"},
@@ -32,20 +18,17 @@ const messagesData= [
     {id: "3", text:"I'm a cop"},
 ]
 
-const Dialogs = ()=>{
+let dialogs = dialogsData.map(d => <DialogItem name={d.name} id={d.id}/>) //из массива сообщений возвращается компонент DialogItem  с параметрами name, id
+let messages = messagesData.map(m => <Message text={m.text}/>) //из массива сообщений возвращается компонент Message  с параметром text
+
+const Dialogs = (props)=>{
     return (
         <div className={style.dialogs}>
             <div className={style.dialog_persons}>
-                <Dialog_person name={dialogsData[0].name} id={dialogsData[0].id}/>
-                <Dialog_person name={dialogsData[1].name} id={dialogsData[1].id}/>
-                <Dialog_person name={dialogsData[2].name} id={dialogsData[2].id}/>
-                <Dialog_person name={dialogsData[3].name} id={dialogsData[3].id}/>
-                <Dialog_person name={dialogsData[4].name} id={dialogsData[4].id}/>
+                {dialogs}
             </div>
             <div className={style.messages}>
-                <Message text={messagesData[0].text}/>
-                <Message text={messagesData[1].text}/>
-                <Message text={messagesData[2].text}/>
+                {messages}
             </div>
         </div>
     )

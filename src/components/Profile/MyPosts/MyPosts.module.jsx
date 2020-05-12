@@ -8,12 +8,12 @@ const postsDada = [
     {message: "Mikkelson", likes: 6},
 ]
 
+let posts = postsDada.map(p => <Post message={p.message} likes={p.likes}/>)
+
 const MyPosts = ()=>{
     return(
         <div className={style.posts}>
-            <Post name={postsDada[0].message} likes={postsDada[0].likes}/>
-            <Post name={postsDada[1].message} likes={postsDada[1].likes}/>
-            <Post name={postsDada[2].message} likes={postsDada[2].likes}/>
+            {posts}
         </div>
     )
 }

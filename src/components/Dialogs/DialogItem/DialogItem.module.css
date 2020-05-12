@@ -1,0 +1,11 @@
+.dialog_person{
+    padding: 0.1em 0;
+}
+.dialog_person_link{
+    text-decoration: none;
+    color: #111111;
+}
+.active{
+    color: #999999;
+    font-weight: 600;
+}

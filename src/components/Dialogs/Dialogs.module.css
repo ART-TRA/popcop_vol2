@@ -6,21 +6,7 @@
     border-right: 1px solid #333333;
     padding: 1em;
 }
-.dialog_person{
-    padding: 0.1em 0;
-}
-.dialog_person_link{
-    text-decoration: none;
-    color: #111111;
-}
-.active{
-    color: #999999;
-    font-weight: 600;
-}
 .messages{
     box-sizing: border-box;
     padding: 1em 2em;
-}
-.message{
-    padding: 0.1em 0;
 }
