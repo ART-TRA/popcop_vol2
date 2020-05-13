@@ -19,10 +19,8 @@ const App = (props) => {
               <Header/>
               <Navbar/>
               <div className='app-wrap_content'>
-                  {/*<Route path='/profile' component={Profile}/>*/}
-
-                  <Route path='/profile' render={()=><Profile data={props.data}/>}/> {/*такой синтаксис для возможности проброса параметров в ф-цию*/}
-                  <Route path='/dialogs' render={()=><Dialogs messages={props.messages} dialogs={props.dialogs}/>}/>
+                  <Route path='/profile' render={()=><Profile state={props.state.profilePage}/>}/> {/*такой синтаксис для возможности проброса параметров в ф-цию*/}
+                  <Route path='/dialogs' render={()=><Dialogs state={props.state.messagesPage}/>}/>
 
                   <Route path='/news' component={News}/>
                   <Route path='/music' component={Music}/>
