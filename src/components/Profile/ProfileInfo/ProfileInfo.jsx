@@ -1,11 +1,12 @@
 import React from "react";
 import style from './ProfileInfo.module.css'
 
-const ProfileInfo=()=>{
+const ProfileInfo=(props)=>{
+    debugger
     let newEl = React.createRef(); //создание ссылки на элемент
     let addPost = ()=>{
         let text = newEl.current.value;
-        alert(text);
+        props.addPost(text);
     }
     return(
         <div className={style.profile_info}>

@@ -16,11 +16,22 @@ let state = {
 
     profilePage: {
         posts: [
-            {message: "Seydoux", likes: 7},
-            {message: "Reedus", likes: 4},
-            {message: "Mikkelson", likes: 6},
+            {id: "1", message: "Seydoux", likes: 7},
+            {id: "2", message: "Reedus", likes: 4},
+            {id: "3", message: "Mikkelson", likes: 6},
         ]
     }
-}
+};
+
+export let addPost = newMessage => { //добавить пост
+    let newPost = {
+        id: "4",
+        message: newMessage,
+        likes: 0
+    };
+    state.profilePage.posts.push(newPost);
+};
+
+
 
 export default state

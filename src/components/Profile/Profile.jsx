@@ -6,7 +6,7 @@ import MyPosts from "./MyPosts/MyPosts.module";
 const Profile = (props)=>{
     return(
         <div>
-            <ProfileInfo/>
+            <ProfileInfo addPost={props.addPost}/>
             <MyPosts data_posts={props.state.posts}/>
         </div>
     )
