@@ -11,7 +11,7 @@ import Settings from "./components/Settings/Settings";
 
 import {BrowserRouter, Route} from "react-router-dom"; //необх импортировать модуль роутинга для работы с роутами
 
-const App = () => {
+const App = (props) => {
   return (
       // тег необходим для использ-я роутинга (экранируем весь сайт единожды на высоком уровне)
       <BrowserRouter>
@@ -19,8 +19,11 @@ const App = () => {
               <Header/>
               <Navbar/>
               <div className='app-wrap_content'>
-                  <Route path='/profile' component={Profile}/>
-                  <Route path='/dialogs' component={Dialogs}/>
+                  {/*<Route path='/profile' component={Profile}/>*/}
+
+                  <Route path='/profile' render={()=><Profile data={props.data}/>}/> {/*такой синтаксис для возможности проброса параметров в ф-цию*/}
+                  <Route path='/dialogs' render={()=><Dialogs messages={props.messages} dialogs={props.dialogs}/>}/>
+
                   <Route path='/news' component={News}/>
                   <Route path='/music' component={Music}/>
                   <Route path='/gallery' component={Gallery}/>
