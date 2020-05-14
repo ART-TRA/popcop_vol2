@@ -1,18 +1,20 @@
 import React from "react";
 import style from './MyPosts.module.css'
 import Post from "./Post/Post";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";
+
 
 const MyPosts = (props)=>{
-    let posts = props.data_posts.map(p => <Post message={p.message} likes={p.likes}/>)
+    let posts = props.data_posts.map(p => <Post message={p.message} likes={p.likes}/>);
 
     let addPost = ()=>{
-        props.dispatch({type: 'ADD-POST'});
+        props.dispatch(addPostActionCreator()); //передача объекта в dispatch через actionCreator
     };
 
     let newEl = React.createRef(); //создание ссылки на элемент
     let onChangeText=()=>{ //ф-ция вызывается всякий раз как меняются данные в поле ввода
         let text = newEl.current.value;
-        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
+        props.dispatch(updateNewPostTextActionCreator(text)); //передача объекта в dispatch через actionCreator
     };
 
     return(
