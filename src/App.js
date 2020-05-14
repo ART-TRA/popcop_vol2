@@ -10,11 +10,9 @@ import Gallery from "./components/Gallery/Gallery";
 import Settings from "./components/Settings/Settings";
 
 import {BrowserRouter, Route} from "react-router-dom";
-import {addMessage, updateMessageText} from "./redux/state"; //необх импортировать модуль роутинга для работы с роутами
 
 const App = (props) => {
   return (
-      // тег необходим для использ-я роутинга (экранируем весь сайт единожды на высоком уровне)
       <BrowserRouter>
           <div className='app-wrap'>
               <Header/>
@@ -22,12 +20,10 @@ const App = (props) => {
               <div className='app-wrap_content'>
                   <Route path='/profile' render={()=><Profile
                       state={props.state.profilePage}
-                      addPost={props.addPost}
-                      updateNewPostText={props.updateNewPostText}/>}/>
+                      dispatch={props.dispatch}/>}/>
                   <Route path='/dialogs' render={()=><Dialogs
                       state={props.state.messagesPage}
-                      updateMessageText={props.updateMessageText}
-                      addMessage={props.addMessage}/>}/>
+                      dispatch={props.dispatch}/>}/>
 
                   <Route path='/news' component={News}/>
                   <Route path='/music' component={Music}/>
@@ -37,6 +33,6 @@ const App = (props) => {
           </div>
       </BrowserRouter>
   );
-}
+};
 
 export default App;

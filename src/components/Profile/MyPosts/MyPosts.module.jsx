@@ -6,13 +6,13 @@ const MyPosts = (props)=>{
     let posts = props.data_posts.map(p => <Post message={p.message} likes={p.likes}/>)
 
     let addPost = ()=>{
-        props.addPost();
+        props.dispatch({type: 'ADD-POST'});
     };
 
     let newEl = React.createRef(); //создание ссылки на элемент
     let onChangeText=()=>{ //ф-ция вызывается всякий раз как меняются данные в поле ввода
         let text = newEl.current.value;
-        props.updateNewPostText(text);
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text});
     };
 
     return(
