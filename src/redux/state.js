@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../render";
+
 let state = {
     messagesPage: {
         dialogs: [
@@ -12,6 +14,7 @@ let state = {
             {id: "2", text:"You're busted buddy!"},
             {id: "3", text:"I'm a cop"},
         ],
+        newMessageText: ""
     },
 
     profilePage: {
@@ -19,19 +22,42 @@ let state = {
             {id: "1", message: "Seydoux", likes: 7},
             {id: "2", message: "Reedus", likes: 4},
             {id: "3", message: "Mikkelson", likes: 6},
-        ]
+        ],
+        newPostText: ""
     }
 };
 
-export let addPost = newMessage => { //добавить пост
-    let newPost = {
-        id: "4",
-        message: newMessage,
-        likes: 0
+export let addMessage = () =>{
+    let newMessage = {
+        id: 4,
+        text: state.messagesPage.newMessageText
     };
-    state.profilePage.posts.push(newPost);
+    state.messagesPage.messages.push(newMessage);
+    state.messagesPage.newMessageText = '';
+    rerenderEntireTree(state);
+};
+
+export let updateMessageText = newMessage => {
+    state.messagesPage.newMessageText = newMessage;
+    rerenderEntireTree(state);
 };
 
 
+
+export let updateNewPostText = newText =>{
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+};
+
+export let addPost = () => { //добавить пост
+    let newPost = {
+        id: "4",
+        message: state.profilePage.newPostText,
+        likes: 0
+    };
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = '';
+    rerenderEntireTree(state); //при вызове ф-ции добавить пост вызыв-ся ф-ция перерисовки
+};
 
 export default state

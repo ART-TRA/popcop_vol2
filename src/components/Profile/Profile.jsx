@@ -6,10 +6,14 @@ import MyPosts from "./MyPosts/MyPosts.module";
 const Profile = (props)=>{
     return(
         <div>
-            <ProfileInfo addPost={props.addPost}/>
-            <MyPosts data_posts={props.state.posts}/>
+            <ProfileInfo/>
+            <MyPosts
+                data_posts={props.state.posts}
+                addPost={props.addPost}
+                newPostText={props.state.newPostText}
+                updateNewPostText={props.updateNewPostText}/>
         </div>
     )
-}
+};
 
 export default Profile

@@ -9,7 +9,8 @@ import Music from "./components/Music/Music";
 import Gallery from "./components/Gallery/Gallery";
 import Settings from "./components/Settings/Settings";
 
-import {BrowserRouter, Route} from "react-router-dom"; //необх импортировать модуль роутинга для работы с роутами
+import {BrowserRouter, Route} from "react-router-dom";
+import {addMessage, updateMessageText} from "./redux/state"; //необх импортировать модуль роутинга для работы с роутами
 
 const App = (props) => {
   return (
@@ -19,8 +20,14 @@ const App = (props) => {
               <Header/>
               <Navbar/>
               <div className='app-wrap_content'>
-                  <Route path='/profile' render={()=><Profile state={props.state.profilePage} addPost={props.addPost}/>}/> {/*такой синтаксис для возможности проброса параметров в ф-цию*/}
-                  <Route path='/dialogs' render={()=><Dialogs state={props.state.messagesPage}/>}/>
+                  <Route path='/profile' render={()=><Profile
+                      state={props.state.profilePage}
+                      addPost={props.addPost}
+                      updateNewPostText={props.updateNewPostText}/>}/>
+                  <Route path='/dialogs' render={()=><Dialogs
+                      state={props.state.messagesPage}
+                      updateMessageText={props.updateMessageText}
+                      addMessage={props.addMessage}/>}/>
 
                   <Route path='/news' component={News}/>
                   <Route path='/music' component={Music}/>
