@@ -4,13 +4,14 @@ import * as serviceWorker from './serviceWorker';
 import store from './redux/redux_store';
 import ReactDOM from "react-dom";
 import App from "./App";
+import StoreContext, {Provider} from "./StoreContext";
 
 export let rerenderEntireTree = (state)=>{
     ReactDOM.render(
         <React.StrictMode>
-            <App store={store}
-                 state={state} //messagesPage и profilePage
-                 dispatch={store.dispatch.bind(store)}/>
+            <Provider store={store}>
+                <App/>
+            </Provider>
         </React.StrictMode>,
         document.getElementById('root')
     );
