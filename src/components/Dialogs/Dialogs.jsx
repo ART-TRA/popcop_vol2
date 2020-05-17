@@ -7,8 +7,8 @@ import {addMessageActionCreator, updateMessageTextActionCreator} from "../../red
 
 
 const Dialogs = (props)=>{
-    let dialogs = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>) //из массива сообщений возвращается компонент DialogItem  с параметрами name, id
-    let messages = props.state.messages.map(m => <Message text={m.text}/>) //из массива сообщений возвращается компонент Message  с параметром text
+    let dialogs = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>); //из массива сообщений возвращается компонент DialogItem  с параметрами name, id
+    let messages = props.state.messages.map(m => <Message text={m.text}/>); //из массива сообщений возвращается компонент Message  с параметром text
 
     let addMessage = ()=>{
         props.dispatch(addMessageActionCreator());

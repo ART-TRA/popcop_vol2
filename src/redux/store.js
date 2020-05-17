@@ -1,6 +1,19 @@
 import profile_reducer from "./profile_reducer";
 import dialog_reducer from "./dialog_reducer";
 
+
+
+const add_news = 'ADD_NEWS';
+const update_news = 'UPDATE_NEWS';
+export const add_news_action_creator = ()=>{ //actionCreator возвращает action
+    return {type: add_news}
+};
+export const update_news_text = (text)=>{
+    return {type: update_news, newsText: text}
+};
+
+
+
 let store = {
     _state: {
         messagesPage: {
@@ -18,7 +31,6 @@ let store = {
             ],
             newMessageText: ""
         },
-
         profilePage: {
             posts: [
                 {id: "1", message: "Seydoux", likes: 7},
@@ -26,8 +38,15 @@ let store = {
                 {id: "3", message: "Mikkelson", likes: 6},
             ],
             newPostText: ""
+        },
+        newsPage: {
+            news: [
+
+            ],
+            newsText: ''
         }
     },
+
     _callSubscriber(){
         console.log('state has changed');
     },
@@ -37,33 +56,6 @@ let store = {
     subscribe(observer){
         this._callSubscriber = observer;
     },
-    // addMessage(){
-    //     let newMessage = {
-    //         id: 4,
-    //         text: this._state.messagesPage.newMessageText
-    //     };
-    //     this._state.messagesPage.messages.push(newMessage);
-    //     this._state.messagesPage.newMessageText = '';
-    //     this._callSubscriber(this._state);
-    // },
-    // updateMessageText(newMessage){
-    //     this._state.messagesPage.newMessageText = newMessage;
-    //     this._callSubscriber(this._state);
-    // },
-    // updateNewPostText(newText){
-    //     this._state.profilePage.newPostText = newText;
-    //     this._callSubscriber(this._state);
-    // },
-    // addPost(){
-    //     let newPost = {
-    //         id: "4",
-    //         message: this._state.profilePage.newPostText,
-    //         likes: 0
-    //     };
-    //     this._state.profilePage.posts.push(newPost);
-    //     this._state.profilePage.newPostText = '';
-    //     this._callSubscriber(this._state);
-    // }
 
     dispatch(action){
         profile_reducer(this._state.profilePage, action);
