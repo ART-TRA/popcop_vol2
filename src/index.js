@@ -8,7 +8,8 @@ import App from "./App";
 export let rerenderEntireTree = (state)=>{
     ReactDOM.render(
         <React.StrictMode>
-            <App state={state} //messagesPage и profilePage
+            <App store={store}
+                 state={state} //messagesPage и profilePage
                  dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>,
         document.getElementById('root')

@@ -10,6 +10,7 @@ import Gallery from "./components/Gallery/Gallery";
 import Settings from "./components/Settings/Settings";
 
 import {BrowserRouter, Route} from "react-router-dom";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 const App = (props) => {
   return (
@@ -18,13 +19,9 @@ const App = (props) => {
               <Header/>
               <Navbar/>
               <div className='app-wrap_content'>
-                  <Route path='/profile' render={()=><Profile
-                      state={props.state.profilePage}
-                      dispatch={props.dispatch}/>}/>
+                  <Route path='/profile' render={()=><Profile store={props.store}/>}/>
 
-                  <Route path='/dialogs' render={()=><Dialogs
-                      state={props.state.messagesPage}
-                      dispatch={props.dispatch}/>}/>
+                  <Route path='/dialogs' render={()=><DialogsContainer store={props.store}/>}/>
 
                   <Route path='/news' render={()=><News
                       state={props.state.newsPage}
