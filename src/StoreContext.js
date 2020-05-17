@@ -9,3 +9,5 @@ export const Provider = (props) => {
 };
 
 export default StoreContext
+
+//чисто тренировочная бня, не требуется для дальнейшего
