@@ -28,16 +28,30 @@ let initialState = { //первоначальный state который зан�
 const dialog_reducer = (state = initialState, action) =>{
     switch (action.type) {
         case UPDATE_MESSAGE_TEXT:
-            state.newMessageText = action.newMessage;
-            return state;
+            return {
+                ...state, //копирование state
+                newMessageText: action.newMessage //в новую копию state вносятся изм-я
+            };
+
         case ADD_MESSAGE:
             let newMessage = {
                 id: 4,
                 text: state.newMessageText
             };
-            state.messages.push(newMessage);
-            state.newMessageText = '';
-            return state;
+            //копирование объекта и сразу его возвращение
+            //вместо
+            //let stateCopy = {...state};
+            //stateCopy.messages = [...state.messages];
+            //stateCopy.messages.push(newMessage);
+            //return stateCopy;
+            //ПО ВЗРОСЛОМУ, ПО МУЖСКИ ПИШЕТСЯ ТАК!!!!!!!!!!!!!!!!!!
+            return {
+                ...state,
+                //вместо метода push, элемент, который нужно добавить в массив, записывается в конце
+                messages: [...state.messages, newMessage],
+                newMessageText: ''
+            };
+
         default:
             return state
     }

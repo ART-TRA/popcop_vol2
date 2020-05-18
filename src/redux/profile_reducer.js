@@ -14,7 +14,7 @@ let initialState = {
         {id: "3", message: "Mikkelson", likes: 6},
     ],
     newPostText: ""
-}
+};
 
 const profile_reducer = (state = initialState, action)=>{
     switch (action.type) {
@@ -24,12 +24,18 @@ const profile_reducer = (state = initialState, action)=>{
                 message: state.newPostText,
                 likes: 0
             };
-            state.posts.push(newPost);
-            state.newPostText = '';
-            return state; //если происх return то break не нужен
+            return {
+              ...state,
+              posts: [...state.posts, newPost],
+              newPostText: ''
+            };
+
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state;
+            return {
+                ...state,
+                newPostText: action.newText
+            };
+
         default: //если придёт незафиксир action то просто вернётся первонач state
             return state;
     }

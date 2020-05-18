@@ -11,6 +11,7 @@ import Settings from "./components/Settings/Settings";
 
 import {BrowserRouter, Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import Users from "./components/Users/Users";
 
 const App = (props) => {
   return (
@@ -22,6 +23,7 @@ const App = (props) => {
                   <Route path='/profile' render={()=><Profile/>}/>
 
                   <Route path='/dialogs' render={()=><DialogsContainer/>}/>
+                  <Route path='/users' render={()=><Users/>}/>
 
                   <Route path='/news' render={()=><News
                       state={props.state.newsPage}
