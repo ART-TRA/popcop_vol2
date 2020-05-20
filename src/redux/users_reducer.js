@@ -1,15 +1,22 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
 
 let initialState = {
-    users: []
-
+    users: [],
+    pageSize: 100,
+    totalUsersCount: 0,
+    currentPage: 1 //текущая страница (она будет выделена в меню выбора страниц)
 };
 
 export const followAC = userId => ({type: FOLLOW, userId: userId});
 export const unfollowAC = userId => ({type: UNFOLLOW, userId: userId});
 export const setUsersAC = users => ({type: SET_USERS, users});
+export const setCurrentPageAC = currentPage => ({type: SET_CURRENT_PAGE, currentPage});
+export const setUsersTotalCountAC = totalCount => ({type: SET_USERS_TOTAL_COUNT, totalCount});
+
 
 const users_reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -37,6 +44,16 @@ const users_reducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: [...state.users, ...action.users]
+            };
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            };
+        case SET_USERS_TOTAL_COUNT:
+            return{
+                ...state,
+                totalUsersCount: action.totalCount
             };
         default:
             return state

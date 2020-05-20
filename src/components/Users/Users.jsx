@@ -5,8 +5,9 @@ import userPhoto from '../../assets/images/empty_logo.png';
 
 class Users extends React.Component {
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(rensponse => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(rensponse => {
             this.props.setUsers(rensponse.data.items);
+            this.props.setUsersTotalCount(rensponse.data.totalCount);
         });
     }
     //старый тестовый массив пользователей
@@ -38,9 +39,27 @@ class Users extends React.Component {
         //     ]
         // );
 
+    onPageChanged = pageNumber => {
+        this.props.setCurrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(rensponse => {
+            this.props.setUsers(rensponse.data.items);
+
+        });
+    };
     render(){
+        let pagesCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize); //кол-во страниц польз-лей
+        let pages = [];
+        for(let i=1;i<=pagesCount;++i){
+            pages.push(i);
+        }
+
         return(
             <div>
+                <div className={style.pageNumber}>
+                    {pages.map(p =>{
+                        return <span className={this.props.currentPage === p && style.currentPage}
+                                     onClick={() => this.onPageChanged(p)}>{p}</span>})}
+                </div>
                 {this.props.users.map(u =>
                     <div key={u.id} className={style.users}>
                         <div className={style.userLogo}>
@@ -65,7 +84,6 @@ class Users extends React.Component {
             </div>
         )
     }
-
-};
+}
 
 export default Users
