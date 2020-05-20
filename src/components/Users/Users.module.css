@@ -1,0 +1,31 @@
+.users{
+    display: flex;
+    width: 100%;
+}
+.userLogo{
+    display: flex;
+    flex-direction: column;
+    width: 4.5em;
+}
+
+.userImg{
+    /*background-image: url("https://avatars.mds.yandex.net/get-zen_doc/1570751/pub_5d19ee6e8706ab00adcd8102_5d19f32457394600adca835f/scale_1200");*/
+    /*background-image: url({props.source});*/
+    background-size: cover;
+    background-position: center;
+    width: 60px;
+    height: 60px;
+    /*border-radius: 50%;*/
+}.userDesc{
+     width: 60%;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }
+ .location{
+     width: 5em;
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-start;
+     align-items: flex-start;
+ }
