@@ -13,4 +13,6 @@ let reducers = combineReducers({
 
 let store = createStore(reducers);
 
+window.store = store; //чтобы в консоли браузера обращаться к store и его методам для отладки
+
 export default store

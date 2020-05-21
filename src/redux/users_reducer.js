@@ -3,7 +3,7 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const TOGGLE_PRELOADER = 'TOGGLE_PRELOADER';
 
 let initialState = {
     users: [],
@@ -13,12 +13,13 @@ let initialState = {
     isFetching: false //отображение preloader (крутилки ожидания)
 };
 
-export const followAC = userId => ({type: FOLLOW, userId: userId});
-export const unfollowAC = userId => ({type: UNFOLLOW, userId: userId});
-export const setUsersAC = users => ({type: SET_USERS, users});
-export const setCurrentPageAC = currentPage => ({type: SET_CURRENT_PAGE, currentPage});
-export const setUsersTotalCountAC = totalCount => ({type: SET_USERS_TOTAL_COUNT, totalCount});
-export const toggleIsFetchingAC = fetching => ({type: TOGGLE_IS_FETCHING, fetching});
+//ACTION CREATORS
+export const follow = userId => ({type: FOLLOW, userId: userId});
+export const unfollow = userId => ({type: UNFOLLOW, userId: userId});
+export const setUsers = users => ({type: SET_USERS, users});
+export const setCurrentPage = currentPage => ({type: SET_CURRENT_PAGE, currentPage});
+export const setUsersTotalCount = totalCount => ({type: SET_USERS_TOTAL_COUNT, totalCount});
+export const togglePreloader = fetching => ({type: TOGGLE_PRELOADER, fetching});
 
 
 const users_reducer = (state = initialState, action) => {
@@ -46,7 +47,8 @@ const users_reducer = (state = initialState, action) => {
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                //users: [...state.users, ...action.users] //польз-ли добавляются в конец списка
+                users: [...action.users] //страницы польз-лей перепиывают др др
             };
         case SET_CURRENT_PAGE:
             return {
@@ -58,7 +60,7 @@ const users_reducer = (state = initialState, action) => {
                 ...state,
                 totalUsersCount: action.totalCount
             };
-        case TOGGLE_IS_FETCHING:
+        case TOGGLE_PRELOADER:
             return {
               ...state,
               isFetching: action.fetching
