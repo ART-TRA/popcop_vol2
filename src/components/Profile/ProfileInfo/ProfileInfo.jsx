@@ -13,10 +13,10 @@ const ProfileInfo=(props)=>{
                 ? props.profile.photos.large
                 : "https://i.playground.ru/p/SCfJ19mum0SsgDhAN1jALA.jpeg"}/>
             <div className={style.profile_desc}>
-
+                <div>name: {props.profile.fullName}</div>
             </div>
         </div>
     )
-}
+};
 
 export default ProfileInfo
