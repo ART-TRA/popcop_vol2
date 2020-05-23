@@ -4,13 +4,15 @@ const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
 const TOGGLE_PRELOADER = 'TOGGLE_PRELOADER';
+const TOGGLE_FOLLOWING = 'TOGGLE_FOLLOWING';
 
 let initialState = {
     users: [],
-    pageSize: 100,
+    pageSize: 50,
     totalUsersCount: 0,
     currentPage: 1, //текущая страница (она будет выделена в меню выбора страниц)
-    isFetching: false //отображение preloader (крутилки ожидания)
+    isFetching: true, //отображение preloader (крутилки ожидания)
+    followingInProgress: [] //массив для добавления активных кнопок подписки польз-лей (все кнопки, которые сюда попадают блокируются до прихода response)
 };
 
 //ACTION CREATORS
@@ -20,7 +22,7 @@ export const setUsers = users => ({type: SET_USERS, users});
 export const setCurrentPage = currentPage => ({type: SET_CURRENT_PAGE, currentPage});
 export const setUsersTotalCount = totalCount => ({type: SET_USERS_TOTAL_COUNT, totalCount});
 export const togglePreloader = fetching => ({type: TOGGLE_PRELOADER, fetching});
-
+export const toggleFollowing = (followed, userId) =>({type: TOGGLE_FOLLOWING, followed, userId});
 
 const users_reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -29,7 +31,7 @@ const users_reducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map(u => { //map возвращает массив, поэтому квадратные скобки не нужны
                     if(u.id === action.userId){
-                        return {...u, following: true}
+                        return {...u, followed: true}
                     }
                     return u
                 }),
@@ -39,7 +41,7 @@ const users_reducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map(u => {
                     if(u.id === action.userId){
-                        return {...u, following: false}
+                        return {...u, followed: false}
                     }
                     return u
                 })
@@ -47,8 +49,8 @@ const users_reducer = (state = initialState, action) => {
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users, ...action.users] //польз-ли добавляются в конец списка
-                // users: [...action.users] //страницы польз-лей перепиывают др др
+                //users: [...state.users, ...action.users] //польз-ли добавляются в конец списка
+                users: action.users //страницы польз-лей перепиывают др др
             };
         case SET_CURRENT_PAGE:
             return {
@@ -64,6 +66,13 @@ const users_reducer = (state = initialState, action) => {
             return {
               ...state,
               isFetching: action.fetching
+            };
+        case TOGGLE_FOLLOWING:
+            return {
+                ...state,
+                followingInProgress: action.followed
+                    ? [...state.followingInProgress, action.userId] //если кнопка нажата, в массив followingInProgress добавляется userId для блокировки
+                    : state.followingInProgress.filter(id => id != action.userId) //если нет, то удаляется из массива
             };
         default:
             return state

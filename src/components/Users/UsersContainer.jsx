@@ -4,33 +4,31 @@ import {
     follow,
     setCurrentPage,
     setUsers,
-    setUsersTotalCount,
+    setUsersTotalCount, toggleFollowing,
     togglePreloader,
     unfollow
 } from "../../redux/users_reducer";
-import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {getUsers} from "../../api/api";
+import {usersAPI} from "../../api/api";
+
 
 class UsersSubContainer extends React.Component {
     componentDidMount() {
         this.props.togglePreloader(true);
-        getUsers().then(response => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(response => {
             this.props.togglePreloader(false);
-            this.props.setUsers(response.data.items);
-            this.props.setUsersTotalCount(response.data.totalCount);
+            this.props.setUsers(response.items);
+            this.props.setUsersTotalCount(response.totalCount);
         });
     }
 
     onPageChanged = pageNumber => {
         this.props.setCurrentPage(pageNumber);
         this.props.togglePreloader(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        }).then(rensponse => {
+        usersAPI.getUsers(pageNumber, this.props.pageSize).then(response => {
             this.props.togglePreloader(false);
-            this.props.setUsers(rensponse.data.items);
+            this.props.setUsers(response.items);
 
         });
     };
@@ -44,7 +42,9 @@ class UsersSubContainer extends React.Component {
                    onPageChanged={this.onPageChanged}
                    users={this.props.users}
                    unfollow={this.props.unfollow}
-                   follow={this.props.follow}/>
+                   follow={this.props.follow}
+                   followingInProgress={this.props.followingInProgress}
+                   toggleFollowing={this.props.toggleFollowing}/>
         </>
     }
 }
@@ -55,12 +55,19 @@ const mapStateToProps = (state) => { //принимает весь state цел�
         pageSize: state.usersPage.pageSize, //размер страницы(кол-во польз-лей для отображения) и общее кол-во пользователей нужны для отрисовки страницы
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 };
 
 
+export default connect(mapStateToProps, {
+    setUsers,
+    setCurrentPage,
+    setUsersTotalCount,
+    togglePreloader,
+    follow,
+    unfollow,
+    toggleFollowing
+})(UsersSubContainer);
 
-const UsersContainer = connect(mapStateToProps, {follow,unfollow,setUsers,setCurrentPage,setUsersTotalCount,togglePreloader})(UsersSubContainer);
-
-export default UsersContainer
