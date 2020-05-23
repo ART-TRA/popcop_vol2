@@ -11,21 +11,24 @@ import {
 import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import {getUsers} from "../../api/api";
 
 class UsersSubContainer extends React.Component {
     componentDidMount() {
         this.props.togglePreloader(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(rensponse => {
+        getUsers().then(response => {
             this.props.togglePreloader(false);
-            this.props.setUsers(rensponse.data.items);
-            this.props.setUsersTotalCount(rensponse.data.totalCount);
+            this.props.setUsers(response.data.items);
+            this.props.setUsersTotalCount(response.data.totalCount);
         });
     }
 
     onPageChanged = pageNumber => {
         this.props.setCurrentPage(pageNumber);
         this.props.togglePreloader(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(rensponse => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        }).then(rensponse => {
             this.props.togglePreloader(false);
             this.props.setUsers(rensponse.data.items);
 

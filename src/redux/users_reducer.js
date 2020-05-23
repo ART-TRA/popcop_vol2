@@ -27,7 +27,7 @@ const users_reducer = (state = initialState, action) => {
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => { //map возвращае массив, поэтому квадратные скобки не нужны
+                users: state.users.map(u => { //map возвращает массив, поэтому квадратные скобки не нужны
                     if(u.id === action.userId){
                         return {...u, following: true}
                     }
@@ -47,8 +47,8 @@ const users_reducer = (state = initialState, action) => {
         case SET_USERS:
             return {
                 ...state,
-                //users: [...state.users, ...action.users] //польз-ли добавляются в конец списка
-                users: [...action.users] //страницы польз-лей перепиывают др др
+                users: [...state.users, ...action.users] //польз-ли добавляются в конец списка
+                // users: [...action.users] //страницы польз-лей перепиывают др др
             };
         case SET_CURRENT_PAGE:
             return {

@@ -3,12 +3,14 @@ import profile_reducer from "./profile_reducer";
 import dialog_reducer from "./dialog_reducer";
 import news_reducer from "./news_reducer";
 import users_reducer from "./users_reducer";
+import auth_reducer from "./auth_reducer";
 
 let reducers = combineReducers({
     profilePage: profile_reducer,
     messagesPage: dialog_reducer,
     newsPage: news_reducer,
-    usersPage: users_reducer
+    usersPage: users_reducer,
+    auth: auth_reducer
 });
 
 let store = createStore(reducers);

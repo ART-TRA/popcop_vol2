@@ -27,7 +27,7 @@ const mapStateToProps = (state) =>{
     }
 };
 
-let WithRouterProfileContainer = withRouter(ProfileContainer); //оборачивание компоненты в роут, для просмотра инф-и с ббраузерной строки
+let WithRouterProfileContainer = withRouter(ProfileContainer); //оборачивание компоненты в роут, для просмотра инф-и с браузерной строки
 //оборачивается именно этот компонент, т.к. в его методе componentDidMount происходит ajax запрос, операющийся на данные url адреса польз-ля
 
 export default connect (mapStateToProps, {setUserProfile})(WithRouterProfileContainer);

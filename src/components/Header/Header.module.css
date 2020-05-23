@@ -2,8 +2,15 @@
     grid-area: header;
     /*border-bottom: 1px solid #999999;*/
     padding: 0.3em 3em;
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .header img{
     height: 100%;
+}
+.login_link{
+    color: #111111;
+    text-decoration: none;
+    text-transform: uppercase;
 }
