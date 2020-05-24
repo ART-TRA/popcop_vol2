@@ -29,8 +29,9 @@ const mapStateToProps = (state) => {
     return {
         newMessageText: state.messagesPage.newMessageText,
         messages: state.messagesPage.messages,
-        dialogs: state.messagesPage.dialogs
+        dialogs: state.messagesPage.dialogs,
         //messagesPage: state.messagesPage
+        isAuth: state.auth.isAuth
     }
 };
 //вторая возвращает объект со всеми dispatch, в кач-ве параметра принимает dispatch
