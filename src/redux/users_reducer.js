@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -79,5 +81,78 @@ const users_reducer = (state = initialState, action) => {
     }
 
 };
+
+//THUNK----------------------------------------------------------------------
+export const getUsers = (currentPage, pageSize) => { //thunkCreator
+    return dispatch => {
+        dispatch(togglePreloader(true));
+        usersAPI.getUsers(currentPage, pageSize).then(response => {
+            dispatch(togglePreloader(false));
+            dispatch(setUsers(response.items));
+            dispatch(setUsersTotalCount(response.totalCount));
+        });
+    };
+};
+
+export const unfollow_t = userId => { //thunkCreator
+    return dispatch => {
+        dispatch(toggleFollowing(true, userId));
+        usersAPI.unfollow(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unfollow(userId))
+            }
+            dispatch(toggleFollowing(false, userId));
+        });
+    }
+};
+
+export const follow_t = userId => { //thunkCreator
+    return dispatch => {
+        dispatch(toggleFollowing(true, userId));
+        usersAPI.follow(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(follow(userId))
+            }
+            dispatch(toggleFollowing(false, userId));
+        });
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export default users_reducer

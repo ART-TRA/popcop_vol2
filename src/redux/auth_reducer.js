@@ -1,3 +1,5 @@
+import {auth_API} from "../api/api";
+
 const SET_USER_DATA = 'SET_USER_DATA'; //установить пользовательские данные
 
 export const setAuthUserData = (userId,login,email) => ({type: SET_USER_DATA, data: {userId,login,email}});
@@ -19,6 +21,16 @@ const auth_reducer = (state=initialState, action) => {
             };
         default:
             return state
+    }
+};
+
+export const auth = () => {
+    return dispatch => {
+        return auth_API.auth().then(response => {
+            if(response.resultCode === 0){
+                dispatch(setAuthUserData(response.data.userId, response.data.login, response.data.email));
+            }
+        })
     }
 };
 

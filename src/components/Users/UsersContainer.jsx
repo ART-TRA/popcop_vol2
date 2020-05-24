@@ -1,36 +1,22 @@
 import React from "react";
 import connect from "react-redux/lib/connect/connect";
 import {
-    follow,
+    follow, follow_t, getUsers,
     setCurrentPage,
-    setUsers,
-    setUsersTotalCount, toggleFollowing,
-    togglePreloader,
-    unfollow
+    toggleFollowing,
+    unfollow, unfollow_t
 } from "../../redux/users_reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
 
 class UsersSubContainer extends React.Component {
     componentDidMount() {
-        this.props.togglePreloader(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(response => {
-            this.props.togglePreloader(false);
-            this.props.setUsers(response.items);
-            this.props.setUsersTotalCount(response.totalCount);
-        });
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = pageNumber => {
-        this.props.setCurrentPage(pageNumber);
-        this.props.togglePreloader(true);
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then(response => {
-            this.props.togglePreloader(false);
-            this.props.setUsers(response.items);
-
-        });
+        this.props.getUsers(pageNumber, this.props.pageSize);
     };
 
     render() {
@@ -44,7 +30,10 @@ class UsersSubContainer extends React.Component {
                    unfollow={this.props.unfollow}
                    follow={this.props.follow}
                    followingInProgress={this.props.followingInProgress}
-                   toggleFollowing={this.props.toggleFollowing}/>
+                   toggleFollowing={this.props.toggleFollowing}
+
+                   unfollow_t={this.props.unfollow_t}
+                   follow_t={this.props.follow_t}/>
         </>
     }
 }
@@ -62,12 +51,12 @@ const mapStateToProps = (state) => { //принимает весь state цел�
 
 
 export default connect(mapStateToProps, {
-    setUsers,
     setCurrentPage,
-    setUsersTotalCount,
-    togglePreloader,
     follow,
     unfollow,
-    toggleFollowing
+    toggleFollowing,
+    getUsers, //thunk
+    follow_t,
+    unfollow_t
 })(UsersSubContainer);
 

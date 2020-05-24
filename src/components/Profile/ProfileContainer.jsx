@@ -1,17 +1,15 @@
 import React from "react";
 import Profile from "./Profile";
-import * as axios from "axios";
-import {setUserProfile} from "../../redux/profile_reducer";
+import {getProfile} from "../../redux/profile_reducer";
 import connect from "react-redux/lib/connect/connect";
 import {withRouter} from "react-router-dom";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        if(!userId) userId=2;
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(responce =>{
-            this.props.setUserProfile(responce.data);
-        })
+        if(!userId) userId=2; //чисто заглушка на время
+
+        this.props.getProfile(userId);
     }
 
     render() {
@@ -30,4 +28,4 @@ const mapStateToProps = (state) =>{
 let WithRouterProfileContainer = withRouter(ProfileContainer); //оборачивание компоненты в роут, для просмотра инф-и с браузерной строки
 //оборачивается именно этот компонент, т.к. в его методе componentDidMount происходит ajax запрос, операющийся на данные url адреса польз-ля
 
-export default connect (mapStateToProps, {setUserProfile})(WithRouterProfileContainer);
+export default connect (mapStateToProps, {getProfile})(WithRouterProfileContainer);
