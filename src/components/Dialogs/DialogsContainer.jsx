@@ -2,6 +2,8 @@ import React from "react";
 import Dialogs from "./Dialogs";
 import {addMessageActionCreator, updateMessageTextActionCreator} from "../../redux/dialog_reducer";
 import connect from "react-redux/lib/connect/connect";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import auth_reducer from "../../redux/auth_reducer";
 
 // const DialogContainer = (props) => {
 //     return (
@@ -47,8 +49,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 //контейнерная компонента при помощи метода connect возвращает презентационную компоненту
-//метода connect внутри себя имеет методы подписки на изм-е контента (subscribe(observer))
-const DialogContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
-
-
-export default DialogContainer
+//метод connect внутри себя имеет методы подписки на изм-е контента (subscribe(observer))
+export default withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(Dialogs));
