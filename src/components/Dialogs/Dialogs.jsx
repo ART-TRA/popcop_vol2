@@ -12,7 +12,7 @@ const Dialogs = (props)=>{
     };
     let changeMessageText = (event)=>{
         let text = event.target.value;
-        props.changeMessageText(text);
+        props.updateMessageText(text);
     };
 
     return (

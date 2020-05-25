@@ -1,9 +1,9 @@
 import React from "react";
 import Dialogs from "./Dialogs";
-import {addMessageActionCreator, updateMessageTextActionCreator} from "../../redux/dialog_reducer";
+import {addMessage, updateMessageText} from "../../redux/dialog_reducer";
 import connect from "react-redux/lib/connect/connect";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-import auth_reducer from "../../redux/auth_reducer";
+import {compose} from "redux";
 
 // const DialogContainer = (props) => {
 //     return (
@@ -26,7 +26,6 @@ import auth_reducer from "../../redux/auth_reducer";
 //         </StoreContext.Consumer>)
 // };
 
-//созд-ся 2 ф-ции: первая возвращает часть необх state
 const mapStateToProps = (state) => {
     return {
         newMessageText: state.messagesPage.newMessageText,
@@ -36,18 +35,11 @@ const mapStateToProps = (state) => {
         isAuth: state.auth.isAuth
     }
 };
-//вторая возвращает объект со всеми dispatch, в кач-ве параметра принимает dispatch
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addMessage: () => {
-            dispatch(addMessageActionCreator());
-        },
-        changeMessageText: (text) => {
-            dispatch(updateMessageTextActionCreator(text));
-        }
-    }
-};
 
 //контейнерная компонента при помощи метода connect возвращает презентационную компоненту
 //метод connect внутри себя имеет методы подписки на изм-е контента (subscribe(observer))
-export default withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(Dialogs));
+export default compose(
+    connect(mapStateToProps, {addMessage,updateMessageText}),
+    withAuthRedirect
+)(Dialogs);
+

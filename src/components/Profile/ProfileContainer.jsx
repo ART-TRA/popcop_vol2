@@ -4,6 +4,7 @@ import {getProfile} from "../../redux/profile_reducer";
 import connect from "react-redux/lib/connect/connect";
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -20,10 +21,13 @@ class ProfileContainer extends React.Component {
     }
 }
 
-//компонента осуществл редирект на авторизацию
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-let WithRouterProfileContainer = withRouter(AuthRedirectComponent); //оборачивание компоненты в роут, для просмотра инф-и с браузерной строки
-//оборачивается именно этот компонент, т.к. в его методе componentDidMount происходит ajax запрос, операющийся на данные url адреса польз-ля
+const mapStateToProps = state => ({profile: state.profilePage.profile});
 
-const mapStateToProps = (state) => ({profile: state.profilePage.profile});
-export default connect (mapStateToProps, {getProfile})(WithRouterProfileContainer);
+// compose позволяет последовательно оборачивать HOCs друг в друга
+export default compose(
+    connect(mapStateToProps, {getProfile}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer);
+
+
