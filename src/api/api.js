@@ -31,6 +31,18 @@ export let usersAPI = {
     }
 };
 
+export let profileAPI = {
+    getProfile(userId){
+        return instance.get(`profile/${userId}`).then(response => response.data)
+    },
+    getStatus(userId){
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus(userStatus){
+        return instance.put(`profile/status`, {status: userStatus})
+    }
+};
+
 export let auth_API = {
     auth(){
         return instance.get("auth/me").then(response => response.data)

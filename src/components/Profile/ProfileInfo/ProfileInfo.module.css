@@ -1,9 +1,12 @@
-.profile_img{
+.bg_img{
     width: 100%;
     position: absolute;
     z-index: -1;
     left: 0;
     top: 0;
+}
+.profile_img{
+    width: 20em;
 }
 .profile_desc{
     padding: 1em
