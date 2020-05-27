@@ -1,17 +1,21 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import profile_reducer from "./profile_reducer";
-import dialog_reducer from "./dialog_reducer";
-import news_reducer from "./news_reducer";
-import users_reducer from "./users_reducer";
-import auth_reducer from "./auth_reducer";
-import thunkMiddleware from "redux-thunk"
+import profileReducer from "./profileReducer";
+import dialogReducer from "./dialogReducer";
+import newsReducer from "./newsReducer";
+import usersReducer from "./usersReducer";
+import authReducer from "./authReducer";
+import thunkMiddleware from "redux-thunk";
+import { reducer as formReducer } from 'redux-form';
+
+
 
 let reducers = combineReducers({
-    profilePage: profile_reducer,
-    messagesPage: dialog_reducer,
-    newsPage: news_reducer,
-    usersPage: users_reducer,
-    auth: auth_reducer
+    profilePage: profileReducer,
+    messagesPage: dialogReducer,
+    newsPage: newsReducer,
+    usersPage: usersReducer,
+    auth: authReducer,
+    form: formReducer
 });
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));

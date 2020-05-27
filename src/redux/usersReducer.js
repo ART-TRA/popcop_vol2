@@ -26,7 +26,7 @@ export const setUsersTotalCount = totalCount => ({type: SET_USERS_TOTAL_COUNT, t
 export const togglePreloader = fetching => ({type: TOGGLE_PRELOADER, fetching});
 export const toggleFollowing = (followed, userId) =>({type: TOGGLE_FOLLOWING, followed, userId});
 
-const users_reducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -155,4 +155,4 @@ export const follow_t = userId => { //thunkCreator
 
 
 
-export default users_reducer
+export default usersReducer

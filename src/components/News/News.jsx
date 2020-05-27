@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./News.module.css"
-import {addNewActionCreator, updateTextNews} from "../../redux/news_reducer";
+import {addNewActionCreator, updateTextNews} from "../../redux/newsReducer";
 import NewsItem from "./NewsItem/NewsItem";
 
 

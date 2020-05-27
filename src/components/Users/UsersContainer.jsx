@@ -1,15 +1,17 @@
 import React from "react";
-import connect from "react-redux/lib/connect/connect";
+
 import {
     follow, follow_t, getUsers,
     setCurrentPage,
     toggleFollowing,
     unfollow, unfollow_t
-} from "../../redux/users_reducer";
+} from "../../redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {connect} from "react-redux";
+
 
 
 class UsersSubContainer extends React.Component {

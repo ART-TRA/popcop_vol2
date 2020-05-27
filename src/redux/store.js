@@ -1,5 +1,5 @@
-import profile_reducer from "./profile_reducer";
-import dialog_reducer from "./dialog_reducer";
+import profileReducer from "./profileReducer";
+import dialogReducer from "./dialogReducer";
 
 
 
@@ -58,8 +58,8 @@ let store = {
     },
 
     dispatch(action){
-        profile_reducer(this._state.profilePage, action);
-        dialog_reducer(this._state.messagesPage, action);
+        profileReducer(this._state.profilePage, action);
+        dialogReducer(this._state.messagesPage, action);
         this._callSubscriber(this._state);
     }
 

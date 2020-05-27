@@ -18,7 +18,7 @@ let initialState = {
 
 //в reducer передаётся часть state и action, для первой отрисовки state передаётся в кач-ве значения по умолчанию
 //возвращает изменнённый state
-const news_reducer = (state = initialState, action)=>{
+const newsReducer = (state = initialState, action)=>{
     switch (action.type) {
         case addNews:
             let news = {
@@ -36,4 +36,4 @@ const news_reducer = (state = initialState, action)=>{
     }
 };
 
-export default news_reducer
+export default newsReducer

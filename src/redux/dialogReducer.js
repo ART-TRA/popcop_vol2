@@ -1,12 +1,7 @@
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT';
+const SEND_MESSAGE = 'SEND_MESSAGE';
 
-export const addMessage =()=>{
-    return {type: ADD_MESSAGE}
-};
-
-export const updateMessageText =(text)=>{
-    return {type: UPDATE_MESSAGE_TEXT, newMessage: text}
+export const addMessage = newMessageBody => {
+    return {type: SEND_MESSAGE, newMessageBody}
 };
 
 let initialState = { //первоначальный state который заносится в reducer в кач-ве параметра по умолчанию для state
@@ -21,22 +16,15 @@ let initialState = { //первоначальный state который зан�
         {id: "1", text:"Freeze"},
         {id: "2", text:"You're busted buddy!"},
         {id: "3", text:"I'm a cop"},
-    ],
-    newMessageText: ""
+    ]
 };
 
-const dialog_reducer = (state = initialState, action) =>{
+const dialogReducer = (state = initialState, action) =>{
     switch (action.type) {
-        case UPDATE_MESSAGE_TEXT:
-            return {
-                ...state, //копирование state
-                newMessageText: action.newMessage //в новую копию state вносятся изм-я
-            };
-
-        case ADD_MESSAGE:
+        case SEND_MESSAGE:
             let newMessage = {
                 id: 4,
-                text: state.newMessageText
+                text: action.newMessageBody
             };
             //копирование объекта и сразу его возвращение
             //вместо
@@ -48,8 +36,7 @@ const dialog_reducer = (state = initialState, action) =>{
             return {
                 ...state,
                 //вместо метода push, элемент, который нужно добавить в массив, записывается в конце
-                messages: [...state.messages, newMessage],
-                newMessageText: ''
+                messages: [...state.messages, newMessage]
             };
 
         default:
@@ -57,4 +44,4 @@ const dialog_reducer = (state = initialState, action) =>{
     }
 };
 
-export default dialog_reducer
+export default dialogReducer

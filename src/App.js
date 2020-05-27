@@ -32,7 +32,7 @@ const App = (props) => {
                   <Route path='/music' component={Music}/>
                   <Route path='/gallery' component={Gallery}/>
                   <Route path='/settings' component={Settings}/>
-                  <Route path='/login' component={Login}/>
+                  <Route path='/login' render={()=><Login/>}/>
               </div>
           </div>
       </BrowserRouter>
