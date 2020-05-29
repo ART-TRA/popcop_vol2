@@ -83,16 +83,16 @@ const usersReducer = (state = initialState, action) => {
 };
 
 //THUNK----------------------------------------------------------------------
-export const getUsers = (currentPage, pageSize) => { //thunkCreator
-    return dispatch => {
-        dispatch(togglePreloader(true));
-        usersAPI.getUsers(currentPage, pageSize).then(response => {
-            dispatch(togglePreloader(false));
-            dispatch(setUsers(response.items));
-            dispatch(setUsersTotalCount(response.totalCount));
-        });
-    };
+export const getUsers = (currentPage, pageSize) => dispatch => {
+    dispatch(togglePreloader(true));
+    usersAPI.getUsers(currentPage, pageSize).then(response => {
+        dispatch(togglePreloader(false));
+        dispatch(setCurrentPage(currentPage));
+        dispatch(setUsers(response.items));
+        dispatch(setUsersTotalCount(response.totalCount));
+    });
 };
+
 
 export const unfollow_t = userId => { //thunkCreator
     return dispatch => {

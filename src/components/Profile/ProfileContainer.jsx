@@ -9,7 +9,12 @@ import {connect} from "react-redux";
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        if(!userId) userId=8233; //чисто заглушка на время
+        if(!userId) {
+            userId = this.props.userId; //считывается собственный id профиля
+            if(!userId) { //но если его нет или он не успел прийти то редиректим на страницу авторизации (на время!)
+                this.props.history.push('/login');
+            }
+        }
 
         this.props.getProfile(userId);
         this.props.getStatus(userId);
@@ -24,7 +29,8 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = state => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    userId: state.auth.userId
 });
 
 // compose позволяет последовательно оборачивать HOCs друг в друга

@@ -1,7 +1,7 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-// import connect from "react-redux/lib/connect/connect";
+
 
 
 //чтобы не дублировать connect в компонентах и isAuth в state
