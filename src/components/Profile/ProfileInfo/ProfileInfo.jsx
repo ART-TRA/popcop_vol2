@@ -1,8 +1,7 @@
 import React from "react";
 import style from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus";
-import Profile from "../Profile";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo=(props)=>{
     if(!props.profile){
@@ -16,7 +15,7 @@ const ProfileInfo=(props)=>{
                 : "https://avatars.mds.yandex.net/get-zen_doc/1570751/pub_5d19ee6e8706ab00adcd8102_5d19f32457394600adca835f/scale_1200"}/>
             <div className={style.profile_desc}>
                 <div>name: {props.profile.fullName}</div>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )

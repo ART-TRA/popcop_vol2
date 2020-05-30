@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import style from './MyPosts.module.css'
 import Post from "./Post/Post";
 import {Field, reduxForm} from "redux-form";
@@ -18,7 +18,16 @@ const PostForm = props => {
 
 const PostReduxForm = reduxForm({form: 'post_form'})(PostForm);
 
-const MyPosts = (props) => {
+//у функциональной компоненты аналог метода shouldComponentUpdate - React.memo
+//не вызывает перерисовку компоненты если она не изменилась
+const MyPosts = memo((props) => {
+
+    //если используется классовая компонента, у неё есть метод shouldComponentUpdate
+    // //метод спрашивает у компоненты нужно ли ей отрисовываться
+    // shouldComponentUpdate(nextProps, nextState, nextContext) {
+    //     //отрисовка произойдёт только тогда, когда изменятся props или state
+    //     return nextProps !== this.props || nextState !== this.state;
+    // }
     let posts = props.posts.map(p => <Post key={p.id} message={p.message} likes={p.likes}/>);
 
     const onSubmit = formData => {
@@ -34,6 +43,6 @@ const MyPosts = (props) => {
         </div>
 
     )
-};
+});
 
 export default MyPosts
