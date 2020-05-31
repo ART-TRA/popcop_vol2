@@ -3,11 +3,13 @@ import {profileAPI} from "../api/api";
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
+const DELETE_POST = 'DELETE_POST';
 
 //ACTION CREATORS
 export const addPost = postText => ({type: ADD_POST, postText});
 export const setUserProfile = profile => ({type: SET_USER_PROFILE, profile});
 export const setUserStatus = status => ({type: SET_USER_STATUS, status});
+export const deletePost = postId => ({type: DELETE_POST, postId});
 
 let initialState = {
     posts: [
@@ -42,7 +44,11 @@ const profileReducer = (state = initialState, action)=>{
                 ...state,
                 status: action.status //статус, который приходит с сервера
             };
-
+        case DELETE_POST:
+            return {
+                ...state,
+              posts: state.posts.filter(p => p.id !== action.postId)
+            };
         default: //если придёт незафиксир action то просто вернётся первонач state
             return state;
     }

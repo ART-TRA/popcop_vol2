@@ -29,6 +29,8 @@ const MyPosts = memo((props) => {
     //     return nextProps !== this.props || nextState !== this.state;
     // }
     let posts = props.posts.map(p => <Post key={p.id} message={p.message} likes={p.likes}/>);
+    //чтобы сделать вывод постов обратным НУЖНО ВЕРНУТЬ КОПИЮ МАССИВА PROPS и изменять её
+    //let posts = [...props.posts].reverse().map(p => <Post key={p.id} message={p.message} likes={p.likes}/>);
 
     const onSubmit = formData => {
         props.addPost(formData.postText);
