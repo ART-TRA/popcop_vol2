@@ -25,7 +25,9 @@ export const getPageSize = state => {
 export const getTotalUsersCount = state => {
     return state.usersPage.totalUsersCount
 };
-
+export const getPortionSize = state => {
+    return state.usersPage.portionSize
+};
 export const getCurrentPage = state => {
     return state.usersPage.currentPage
 };

@@ -1,16 +1,18 @@
 import {usersAPI} from "../api/api";
+import {updateObjectInArray} from "../utils/object_helpers";
 
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET_USERS';
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
-const TOGGLE_PRELOADER = 'TOGGLE_PRELOADER';
-const TOGGLE_FOLLOWING = 'TOGGLE_FOLLOWING';
+const FOLLOW = 'usersPage/FOLLOW';
+const UNFOLLOW = 'usersPage/UNFOLLOW';
+const SET_USERS = 'usersPage/SET_USERS';
+const SET_CURRENT_PAGE = 'usersPage/SET_CURRENT_PAGE';
+const SET_USERS_TOTAL_COUNT = 'usersPage/SET_USERS_TOTAL_COUNT';
+const TOGGLE_PRELOADER = 'usersPage/TOGGLE_PRELOADER';
+const TOGGLE_FOLLOWING = 'usersPage/TOGGLE_FOLLOWING';
 
 let initialState = {
     users: [],
     pageSize: 50,
+    portionSize: 10,
     totalUsersCount: 0,
     currentPage: 1, //текущая страница (она будет выделена в меню выбора страниц)
     isFetching: true, //отображение preloader (крутилки ожидания)
@@ -31,22 +33,12 @@ const usersReducer = (state = initialState, action) => {
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => { //map возвращает массив, поэтому квадратные скобки не нужны
-                    if(u.id === action.userId){
-                        return {...u, followed: true}
-                    }
-                    return u
-                }),
+                users: updateObjectInArray(state.users, action.userId, "id", {followed: true})
             };
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if(u.id === action.userId){
-                        return {...u, followed: false}
-                    }
-                    return u
-                })
+                users: updateObjectInArray(state.users, action.userId, "id", {followed: false})
             };
         case SET_USERS:
             return {
@@ -83,39 +75,30 @@ const usersReducer = (state = initialState, action) => {
 };
 
 //THUNK----------------------------------------------------------------------
-export const getUsers = (currentPage, pageSize) => dispatch => {
+export const getUsers = (currentPage, pageSize) => async dispatch => {
     dispatch(togglePreloader(true));
-    usersAPI.getUsers(currentPage, pageSize).then(response => {
-        dispatch(togglePreloader(false));
-        dispatch(setCurrentPage(currentPage));
-        dispatch(setUsers(response.items));
-        dispatch(setUsersTotalCount(response.totalCount));
-    });
+    dispatch(setCurrentPage(currentPage));
+    const response = await usersAPI.getUsers(currentPage, pageSize);
+    dispatch(togglePreloader(false));
+    dispatch(setUsers(response.items));
+    dispatch(setUsersTotalCount(response.totalCount));
 };
 
-
-export const unfollow_t = userId => { //thunkCreator
-    return dispatch => {
-        dispatch(toggleFollowing(true, userId));
-        usersAPI.unfollow(userId).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(unfollow(userId))
-            }
-            dispatch(toggleFollowing(false, userId));
-        });
+export const followUnfollowFlow = async (dispatch, userId, methodAPI, actionCreator) => {
+    dispatch(toggleFollowing(true, userId));
+    const data = await methodAPI(userId);
+    if (data.resultCode === 0) {
+        dispatch(actionCreator(userId))
     }
+    dispatch(toggleFollowing(false, userId));
 };
 
-export const follow_t = userId => { //thunkCreator
-    return dispatch => {
-        dispatch(toggleFollowing(true, userId));
-        usersAPI.follow(userId).then(data => {
-            if (data.resultCode === 0) {
-                dispatch(follow(userId))
-            }
-            dispatch(toggleFollowing(false, userId));
-        });
-    }
+export const unfollow_t = userId => async dispatch => {
+    followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(userId), unfollow);
+};
+
+export const follow_t = userId => async dispatch => {
+    followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(userId), follow);
 };
 
 

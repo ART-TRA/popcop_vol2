@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer from "./profileReducer";
 import dialogReducer from "./dialogReducer";
 import newsReducer from "./newsReducer";
@@ -20,8 +20,11 @@ let reducers = combineReducers({
     form: formReducer
 });
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware))); //создание store
 
-window.store = store; //чтобы в консоли браузера обращаться к store и его методам для отладки
+//let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+
+window.__store__ = store; //чтобы в консоли браузера обращаться к store и его методам для отладки
 
 export default store

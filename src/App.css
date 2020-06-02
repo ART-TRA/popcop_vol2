@@ -1,17 +1,21 @@
-.app-wrap{
-  display: grid;
-
-  grid-template-areas:
-          "header header"
-          "nav content";
-  grid-template-rows: 60px 1fr; /*2 строки*/
-  grid-template-columns: 1fr 10fr; /*2 колонки*/
-  /*grid-gap: 10px; !*расст-е между эл-ми*!*/
+.app {
+    position: relative;
 }
 
-.app-wrap_content{
+.app-wrap_content {
     position: relative;
-    grid-area: content;
     border-top: 1px solid #999999;
+    margin: 4em 0 0 11em;
+}
+
+.bg_img {
+    background-size: cover;
+    background-position: left;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+    left: 0;
+    top: 6vh;
 }
 

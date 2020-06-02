@@ -1,9 +1,14 @@
 .nav_menu{
-    grid-area: nav;
-
+    /*grid-area: nav;*/
+    width: 11em;
+    position: fixed;
+    top: 4em;
+    left: 0;
     display: flex;
     flex-direction: column;
-    /*border-top: 1px solid #ffffff;*/
+    background: #ffffff;
+    height: 100%;
+    box-sizing: border-box;
 }
 .menu_item{
     padding: 0.1em 3em;

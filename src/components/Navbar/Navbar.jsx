@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 
 const Navbar = ()=>{
     return(
-        <nav className='nav_menu'>
+        <nav className={style.nav_menu}>
             <div className={style.menu_item}>
                 <NavLink className={style.menu_item_link} activeClassName={style.active_item} to="/profile">Profile</NavLink>
             </div>

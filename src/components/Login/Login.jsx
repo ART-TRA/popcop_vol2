@@ -7,9 +7,9 @@ import {login} from "../../redux/authReducer";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit, error}) => {
     return (
-        <form className={style.form} onSubmit={props.handleSubmit} action="">
+        <form className={style.form} onSubmit={handleSubmit} action="">
             <Field component={Input} type="text" name='login' placeholder='login/email' validate={[required]}/>
             <Field component={Input} type="password" name='password' placeholder='password' validate={[required]}/>
             <div>
@@ -17,7 +17,7 @@ const LoginForm = (props) => {
             </div>
 
             {/*div покажется если будут ошибки, нужно застилизовать!!!!*/}
-            {props.error && <div>{props.error}</div>}
+            {error && <div>{error}</div>}
 
             <button>log in</button>
         </form>

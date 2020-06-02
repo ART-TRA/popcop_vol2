@@ -1,6 +1,6 @@
 import {auth} from "./authReducer";
 
-const INIT_SUCCESS = 'INIT_SUCCESS';
+const INIT_SUCCESS = 'app/INIT_SUCCESS';
 
 let initialState = {
     init: false

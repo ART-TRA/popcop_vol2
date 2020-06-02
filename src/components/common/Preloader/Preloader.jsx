@@ -4,7 +4,7 @@ import preloader from "../../../assets/images/black_preloader.gif";
 
 let Preloader = (props) => {
     return (
-        <img src={preloader}/>
+        <img className={style.preloader} src={preloader}/>
     )
 };
 

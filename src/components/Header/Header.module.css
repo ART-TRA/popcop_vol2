@@ -1,10 +1,36 @@
 .header{
-    grid-area: header;
+    width: 100vw;
+    height: 4em;
     /*border-bottom: 1px solid #999999;*/
     padding: 0.3em 3em;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+}
+.header button {
+    width: 5.7em;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    padding: .8em;
+    color: #ffffff;
+    background: #111111;
+    border-radius: 3px;
+    margin-left: 1em;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.header button:hover {
+    color: #111111;
+    background: #ffffff;
+    border: 1px solid #111111;
+    box-sizing: border-box;
 }
 .header img{
     height: 100%;
