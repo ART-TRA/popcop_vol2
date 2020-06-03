@@ -4,7 +4,7 @@ import style from './Gallery.module.css'
 const Gallery = ()=>{
     return(
         <div>
-            Gallery
+            Gallery Gallery Gallery
         </div>
     )
 }
