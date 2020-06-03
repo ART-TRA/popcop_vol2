@@ -14,7 +14,7 @@ const ProfileInfo=(props)=>{
                 ? props.profile.photos.large
                 : "https://avatars.mds.yandex.net/get-zen_doc/1570751/pub_5d19ee6e8706ab00adcd8102_5d19f32457394600adca835f/scale_1200"}/>
             <div className={style.profile_desc}>
-                <div>name: {props.profile.fullName}</div>
+                <div className={style.name}>{props.profile.fullName}</div>
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
