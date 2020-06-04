@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "fe900722cf0d576846d63e164ce25702",
+    "revision": "1ee0891df23756c5d239d3bb2b4bdec8",
     "url": "/popcop_vol2/index.html"
   },
   {
@@ -12,7 +12,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/popcop_vol2/static/css/4.366cbcd6.chunk.css"
   },
   {
-    "revision": "99a4d1bc920cd3468bf1",
+    "revision": "90d3d968c161b9ccc0d9",
     "url": "/popcop_vol2/static/css/main.2d0e0d76.chunk.css"
   },
   {
@@ -32,8 +32,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/popcop_vol2/static/js/4.1679f9d2.chunk.js"
   },
   {
-    "revision": "99a4d1bc920cd3468bf1",
-    "url": "/popcop_vol2/static/js/main.3cb7754c.chunk.js"
+    "revision": "90d3d968c161b9ccc0d9",
+    "url": "/popcop_vol2/static/js/main.b61c6731.chunk.js"
   },
   {
     "revision": "1d20daac058778c9aacf",
